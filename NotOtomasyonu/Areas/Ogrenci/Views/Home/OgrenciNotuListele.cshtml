@@ -1,0 +1,33 @@
+﻿@model NotOtomasyonu.OgrenciDb
+@{
+    ViewBag.Title = "OgrenciNotuListele";
+}
+<link href="~/Content/OgrenciNotuListele.css" rel="stylesheet" type="text/css" />
+<div class="tabloDiv">
+    <table class="table table-striped">
+        <tr>
+            <th>Ders</th>
+            <th>Sınav1</th>
+            <th>Sınav2</th>
+            <th>Sınav3</th>
+            <th>Sözlü1</th>
+            <th>Sözlü2</th>
+            <th>Sözlü3</th>
+            <th>NotOrtalaması</th>
+        </tr>
+        @foreach (NotDb aNot in Model.NotDbs)
+        {
+            var notOrt = 0.6 / 3 * (aNot.Sinav1 + aNot.Sinav2 + aNot.Sinav3) + 0.4 / 3 * (aNot.Sozlu1 + aNot.Sozlu2 + aNot.Sozlu3);
+            <tr>
+                <th>@aNot.DersDb.DersAdi</th>
+                <th>@aNot.Sinav1</th>
+                <th>@aNot.Sinav2</th>
+                <th>@aNot.Sinav3</th>
+                <th>@aNot.Sozlu1</th>
+                <th>@aNot.Sozlu2</th>
+                <th>@aNot.Sozlu3</th>
+                <th>@notOrt</th>
+            </tr>
+        }
+    </table>
+</div>

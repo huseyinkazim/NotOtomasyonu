@@ -30,11 +30,11 @@ namespace NotOtomasyonu.Areas.Ogretmen.Controllers
         {
             var notlar = (from not in db.NotDbs where not.DersId == dersId select not).ToList();
             var ogretmen = db.OgretmenDbs.FirstOrDefault(i => i.Id == User.Identity.Name);
-
             if(ogretmen.DersDbs.Count(i=>i.DersId==dersId)==0)
             {
                 return RedirectToAction("DersListele","Home");
             }
+           
             return View(notlar);
         }
         public ActionResult DersListele()

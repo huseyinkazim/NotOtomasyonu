@@ -38,3 +38,17 @@
         color: #fff;
         background-color: #274047;
     }
+
+.btn-custom5 {
+    color: #fff;
+    background-color: #274047;
+}
+    .btn-custom5:hover {
+        color: #E0D987;
+        background-color: #274047;
+    }
+
+.btn-custom6 {
+    color: #274047;
+    background-color: #913F3A;
+}

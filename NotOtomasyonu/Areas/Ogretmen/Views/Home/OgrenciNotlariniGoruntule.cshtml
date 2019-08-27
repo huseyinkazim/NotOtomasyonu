@@ -1,16 +1,16 @@
 ﻿@model IEnumerable<NotOtomasyonu.NotDb>
+@using NotOtomasyonu.Models
 @{
     ViewBag.Title = "OgrenciNotlariniGoruntule";
 }
 <link href="~/Content/OgrenciNotlariniGoruntule.css" rel="stylesheet" type="text/css" />
-@{ 
+@{
     <div class="tabloDiv">
         <table class="table table-striped">
             @Html.AntiForgeryToken()
             <tr>
-                <th>ÖğrenciNo</th>
-                <th>ÖğrenciAdı</th>
-                <th>ÖğrenciSoyadı</th>
+                <th>Öğrenci No</th>
+                <th>Öğrenci Adı & Soyadı</th>
                 <th>DersNo</th>
                 <th>Sınav1</th>
                 <th>Sınav2</th>
@@ -18,7 +18,7 @@
                 <th>Sözlü1</th>
                 <th>Sözlü2</th>
                 <th>Sözlü3</th>
-                <th>NotOrt.</th>
+                <th>Not Ortalaması</th>
             </tr>
             @if (Model.Count() == 0)
             {
@@ -30,23 +30,18 @@
             {
                 foreach (NotDb aNot in Model)
                 {
-                    var notOrt= 0.6 / 3 * (aNot.Sinav1 + aNot.Sinav2 + aNot.Sinav3) + 0.4 / 3 * (aNot.Sozlu1 + aNot.Sozlu2 + aNot.Sozlu3);
-
-                <tr>
-                    <th>@Html.ActionLink(aNot.OgrenciNo, "OgrenciNotlariniGuncelle", new { notId = aNot.NotId, dersId = aNot.DersId }, new { @class = "btn btn-custom4 btn-sm" })</th>
-                    <th>@aNot.OgrenciDb.Ad</th>
-                    <th>@aNot.OgrenciDb.Soyad</th>
-                    <th>@aNot.DersId</th>
-                    <th>@aNot.Sinav1</th>
-                    <th>@aNot.Sinav2</th>
-                    <th>@aNot.Sinav3</th>
-                    <th>@aNot.Sozlu1</th>
-                    <th>@aNot.Sozlu2</th>
-                    <th>@aNot.Sozlu3</th>
-                    <th>
-                        @notOrt
-                    </th>
-                </tr> 
+                    <tr>
+                        <th>@Html.ActionLink(aNot.OgrenciNo, "OgrenciNotlariniGuncelle", new { notId = aNot.NotId, dersId = aNot.DersId }, new { @class = "btn btn-custom4 btn-sm" })</th>
+                        <th>@aNot.OgrenciDb.Ad @aNot.OgrenciDb.Soyad</th>
+                        <th>@aNot.DersId</th>
+                        <th>@aNot.Sinav1</th>
+                        <th>@aNot.Sinav2</th>
+                        <th>@aNot.Sinav3</th>
+                        <th>@aNot.Sozlu1</th>
+                        <th>@aNot.Sozlu2</th>
+                        <th>@aNot.Sozlu3</th>
+                        <th>@Html.NotHesapla(aNot)</th>
+                    </tr>
                 }
             }
         </table>

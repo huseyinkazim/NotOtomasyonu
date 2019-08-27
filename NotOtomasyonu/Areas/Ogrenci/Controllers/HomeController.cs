@@ -72,7 +72,9 @@ namespace NotOtomasyonu.Areas.Ogrenci.Controllers
                     }
                 }
             }
-            return View(MevcutOlmayanDersler);
+            ViewBag.mevcut = mevcutDersler;
+            ViewBag.mevcutOlmayan = MevcutOlmayanDersler;
+            return View(dersler);
         }
         public ActionResult SecilenDers(string dersId)
         {
@@ -86,8 +88,15 @@ namespace NotOtomasyonu.Areas.Ogrenci.Controllers
             };
             db.NotDbs.Add(not);
             db.SaveChanges();
-            return RedirectToAction("DersSecimi",new { id = ogrId});
+            return RedirectToAction("DersSecimi");
         }
-  
+        public ActionResult SilinecekDers(string dersId)
+        {
+            string ogrId = User.Identity.Name;
+            var not = (from aNot in db.NotDbs join aDers in db.DersDbs on aNot.DersId equals aDers.DersId join aOgrenci in db.OgrenciDbs on aNot.OgrenciNo equals aOgrenci.No where aNot.OgrenciNo == ogrId && aDers.DersId == dersId select aNot).FirstOrDefault();
+            db.NotDbs.Remove(not);
+            db.SaveChanges();
+            return RedirectToAction("DersSecimi");
+        }
     }
 }
